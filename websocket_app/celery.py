@@ -54,4 +54,8 @@ def send_latest_valutes():
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(10.0, send_latest_valutes.s(), name="send latest valutes")
+    sender.add_periodic_task(
+            crontab(minute='*/5')
+            send_latest_valutes.s(),
+            name="send latest valutes"
+        )
