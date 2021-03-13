@@ -42,5 +42,3 @@ def setup_periodic_tasks(sender, **kwargs):
         send_webhook.s(),
         name="send webhook"
     )
-
-

@@ -27,7 +27,6 @@ class get_valute(RetrieveUpdateDestroyAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
 class get_valutes(ListCreateAPIView):
     serializer_class = ValuteSerializer
     pagination_class = CustomPagination
@@ -42,5 +41,3 @@ class get_valutes(ListCreateAPIView):
         paginate_queryset = self.paginate_queryset(valutes)
         serializer = self.serializer_class(paginate_queryset, many=True)
         return self.get_paginated_response(serializer.data)
-
-
