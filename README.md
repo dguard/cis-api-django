@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.djangoproject.com/" target="blank"><img src="https://static.djangoproject.com/img/logo-django.42234b631760.svg" width="320" alt="Django Logo" /></a>
+  <a href="https://www.djangoproject.com/" target="blank"><img src="https://www.django-rest-framework.org/img/logo.png" width="320" alt="Django Logo" /></a>
 </p>
 
 # CIS API Django
