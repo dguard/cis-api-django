@@ -4,6 +4,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIV
 from .models import Valute
 from .serializers import ValuteSerializer
 from .pagination import CustomPagination
+from rest_framework.response import Response
 
 
 class get_valute(RetrieveUpdateDestroyAPIView):
@@ -29,9 +30,9 @@ class get_valute(RetrieveUpdateDestroyAPIView):
 class get_valutes(ListCreateAPIView):
     serializer_class = ValuteSerializer
     pagination_class = CustomPagination
-    
+
     def get_queryset(self):
-       valutes = Valute.objects.all()
+       valutes = Valute.objects.order_by('id')
        return valutes
 
     # Get all valutes
@@ -39,7 +40,10 @@ class get_valutes(ListCreateAPIView):
         valutes = self.get_queryset()
         paginate_queryset = self.paginate_queryset(valutes)
         serializer = self.serializer_class(paginate_queryset, many=True)
-        response = self.get_paginated_response(serializer.data)
 
-        return response;
+        return Response({
+            'count': len(valutes),
+            'last_updated_at': valutes[0].created_at,
+            'results': serializer.data
+        })
 

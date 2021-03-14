@@ -39,8 +39,9 @@ def update_valutes():
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
-            crontab(minute='*/5')
-            update_valutes.s(),
-            name="update valutes"
-        )
+        crontab(minute='*/5'),
+        update_valutes.s(),
+        name="update valutes"
+    )
+#     sender.add_periodic_task(10.0, update_valutes.s(), name="update valutes")
 
