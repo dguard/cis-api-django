@@ -20,26 +20,29 @@ celery_app.config_from_object('api.settings', namespace='CELERY')
 
 
 import websockets
-
-
-
 from valutes.models import Valute
 from valutes.serializers import ValuteSerializer
 from asgiref.sync import sync_to_async, async_to_sync
+import datetime
 
 @sync_to_async
 def get_valutes():
     return list(Valute.objects.all())
 
 async def hello():
+    currentMinutes = datetime.datetime.now().strftime('%M')
+    if int(currentMinutes) not in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0]:
+        print('idle %s' % datetime.datetime.now())
+        return
+
     uri = "ws://127.0.0.1:8765"
 
     async with websockets.connect(uri, ping_interval=None) as websocket:
         valutes = await get_valutes()
         payload_json = json.dumps({
             'action': 'update_valutes',
-            'last_updated_at': valutes[0].created_at,
-            'data': ValuteSerializer(valutes, many=True).data
+            'last_updated_at': valutes[0].created_at.isoformat(),
+            'results': ValuteSerializer(valutes, many=True).data
         })
         await websocket.send(payload_json)
 
@@ -48,15 +51,11 @@ async def hello():
         greeting = await websocket.recv()
         print(f"< {greeting}")
 
-@celery_app.task
+@celery_app.task(name="send latest valutes")
 def send_latest_valutes():
     async_to_sync(hello)()
 
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(
-            crontab(minute='*/5'),
-            send_latest_valutes.s(),
-            name="send latest valutes"
-        )
+    sender.add_periodic_task(60.0, send_latest_valutes.s(), name="send latest valutes")

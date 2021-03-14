@@ -43,9 +43,11 @@ async def handle_messages(websocket, path):
                 print(f"> {response}")
 
                 # response to clients
+
                 await notify_users(json.dumps({
                     'type': 'notify_valutes_updated',
-                    'data': json_payload['data']
+                    'last_updated_at': json_payload['last_updated_at'],
+                    'results': json_payload['results']
                 }))
             else:
                 logging.error("unsupported event: {}", data)

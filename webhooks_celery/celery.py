@@ -16,9 +16,15 @@ celery_app.config_from_object('api.settings', namespace='CELERY')
 from valutes.models import Valute
 from webhooks.models import Webhook
 from valutes.serializers import ValuteSerializer
+import datetime
 
 @celery_app.task
 def send_webhook():
+    currentMinutes = datetime.datetime.now().strftime('%M')
+    if int(currentMinutes) not in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0]:
+        print('idle %s' % datetime.datetime.now())
+        return
+
     import requests
     payload_json = ValuteSerializer(Valute.objects.all(), many=True).data
 
@@ -37,8 +43,4 @@ def send_webhook():
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(
-        crontab(minute='*/5'),
-        send_webhook.s(),
-        name="send webhook"
-    )
+    sender.add_periodic_task(60.0, send_webhook.s(), name="send webhook")
