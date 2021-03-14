@@ -6,6 +6,23 @@
 - Django (3.0)
 - Django REST Framework
 
+
+### \>CIS
+
+[Frontend Angular](https://github.com/dguard/cis-frontend-angular)
+
+
+### CIS Django Api Websocket Webhook Graphql
+
+\> API
+
+
+## Captures
+<p align="center">
+  <img src="/captures/postman-api-valutes.png" alt="screenshot" />
+</p>
+
+
 ## Installation
 ```
     virtualenv -p python3 venv
