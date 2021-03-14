@@ -1,4 +1,8 @@
-# CIS Django-Rest-Framework Worker Websocket Webhook Graphql
+<p align="center">
+  <a href="https://www.djangoproject.com/" target="blank"><img src="https://static.djangoproject.com/img/logo-django.42234b631760.svg" width="320" alt="Django Logo" /></a>
+</p>
+
+# CIS API Django
 [Django REST framework](http://www.django-rest-framework.org/) is a powerful and flexible toolkit for building Web APIs.
 
 ## Requirements
@@ -7,14 +11,11 @@
 - Django REST Framework
 
 
-### \>CIS
+| Service | Repo |
+| --- | --- |
+| Frontend Angular 📦 | [cis-front-angular](https://github.com/dguard/cis-front-angular) |
+| API 🐍| cis-api-django (you are inside) |
 
-[Frontend Angular](https://github.com/dguard/cis-front-angular)
-
-
-### CIS Django Api Websocket Webhook Graphql
-
-\> API
 
 
 ## Captures
