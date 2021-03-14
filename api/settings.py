@@ -25,8 +25,6 @@ SECRET_KEY = 'ftov1!91yf@7f7&g2%*@0_e^)ac&f&9jeloc@#v76#^b1dhbl#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -46,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'rest_framework',
+
     'core',
     'valutes',
     'update_valutes_celery',
@@ -54,11 +53,14 @@ INSTALLED_APPS = [
     'websocket_app',
     'graphene_django',
     'graphql_app',
+
 ]
 
 SITE_ID = 1
 
 MIDDLEWARE = [
+    'api.cors.CustomCorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,12 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-  'http://localhost:8000',
-)
 
 ROOT_URLCONF = 'api.urls'
 
