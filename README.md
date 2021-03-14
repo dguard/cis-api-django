@@ -9,7 +9,7 @@
 
 ### \>CIS
 
-[Frontend Angular](https://github.com/dguard/cis-frontend-angular)
+[Frontend Angular](https://github.com/dguard/cis-front-angular)
 
 
 ### CIS Django Api Websocket Webhook Graphql
