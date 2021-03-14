@@ -38,6 +38,7 @@ async def hello():
         valutes = await get_valutes()
         payload_json = json.dumps({
             'action': 'update_valutes',
+            'last_updated_at': valutes[0].created_at,
             'data': ValuteSerializer(valutes, many=True).data
         })
         await websocket.send(payload_json)
@@ -55,7 +56,7 @@ def send_latest_valutes():
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
-            crontab(minute='*/5')
+            crontab(minute='*/5'),
             send_latest_valutes.s(),
             name="send latest valutes"
         )

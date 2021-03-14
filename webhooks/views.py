@@ -21,7 +21,6 @@ class get_delete_update_webhook(RetrieveUpdateDestroyAPIView):
 
     # Get a webhook
     def get(self, request, pk):
-
         webhook = self.get_queryset(pk)
         serializer = WebhookSerializer(webhook)
         return Response(serializer.data, status=status.HTTP_200_OK)

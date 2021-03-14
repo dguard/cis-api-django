@@ -1,2 +1,2 @@
 #/bin/bash
-uvicorn api.acgi:application
+python manage.py runserver

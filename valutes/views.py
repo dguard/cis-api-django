@@ -21,7 +21,6 @@ class get_valute(RetrieveUpdateDestroyAPIView):
 
     # Get a valute
     def get(self, request, pk):
-
         valute = self.get_queryset(pk)
         serializer = ValuteSerializer(valute)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -40,4 +39,7 @@ class get_valutes(ListCreateAPIView):
         valutes = self.get_queryset()
         paginate_queryset = self.paginate_queryset(valutes)
         serializer = self.serializer_class(paginate_queryset, many=True)
-        return self.get_paginated_response(serializer.data)
+        response = self.get_paginated_response(serializer.data)
+
+        return response;
+
