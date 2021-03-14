@@ -19,7 +19,7 @@
 
 ## Captures
 <p align="center">
-  <img src="/captures/postman-api-v1-valutes.png" alt="screenshot" />
+  <img src="/captures/postman-api-v1.png" alt="screenshot" />
 </p>
 
 
